@@ -25,7 +25,7 @@ SECRET_KEY = 'tu5!u_*ind_=q@55(btbrg$$!8yys7h@yqxq)@h&%0q3re9(7c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition

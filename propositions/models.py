@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+class Propositions(models.Model):
+    propositionID = models.IntegerField()
+    propositionTitle = models.CharField(max_length=100, blank=True)
+    propositionSubTitle = models.CharField(max_length=150, blank=True)
+    propositionDescription = models.CharField(max_length=200, blank=True)
+    propositionAuthor = models.CharField(max_length=50, blank=True)

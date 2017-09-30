@@ -6,6 +6,12 @@
 
 ### Instalação
 
+<p align="justify">&emsp;&emsp;Para instalar todas as dependências necessárias do projeto, rode o seguinte comando:</p>
+
+```
+pip install -r requirements.txt
+```
+
 <p align="justify">&emsp;&emsp;Para que seja possível a utilização da API, é preciso executar o makemigrations. Este comando é necessário para criação de novas migrações relacionadas às models:</p>
 
 ```

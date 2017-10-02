@@ -1,8 +1,8 @@
 from django.db import models
 
 class Votings(models.Model):
-    CandidateId = models.PositiveIntegerField(blank=False)
+    candidateId = models.PositiveIntegerField(blank=False)
 
-    # Vote will be caught as an int.
+    # Vote will be caught as an int, and will be interpreted on the front-end
     # -1 = NAO / 0 = ME ABSTENHO / 1 = SIM
-    CandidateVote = models.IntegerField(blank=False)
+    candidateVote = models.IntegerField(blank=False)

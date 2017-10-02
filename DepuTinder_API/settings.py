@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['localhost']
 INSTALLED_APPS = [
     'corsheaders',
     'propositions',
+    'votings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

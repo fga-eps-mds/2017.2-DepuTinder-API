@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from propositions.views import propositions
+from votings.views import votings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^propositions/', propositions),
+    url(r'^votings/', votings),
 ]

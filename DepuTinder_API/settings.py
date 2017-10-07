@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'propositions',
     'votings',
+    'questionnaire',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

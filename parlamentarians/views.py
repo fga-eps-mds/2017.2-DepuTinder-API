@@ -8,4 +8,5 @@ import requests, json
 
 @api_view(['GET'])
 def parlamentarians(request):
-    
+    #Just structure implement
+    return 

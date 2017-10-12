@@ -59,7 +59,12 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK =  {
  # Rest Framework Future Configs
-
+ 'DEFAULT_RENDERER_CLASSES': (
+   'rest_framework.renderers.JSONRenderer',
+  ),
+  'DEFAULT_PARSER_CLASSES': (
+    'rest_framework.parsers.JSONParser',
+  )
 }
 
 ROOT_URLCONF = 'DepuTinder_API.urls'

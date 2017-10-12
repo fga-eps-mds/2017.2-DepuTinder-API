@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 import requests, json
 
 @api_view(['GET'])
-def propositions(request):
+def PropositionsView(request):
     propositions = Propositions.objects.all()
 
     if propositions:

@@ -10,11 +10,11 @@ class Ranking(models.Model):
 
 class CandidateList(models.Model):
     candidate = models.ForeignKey(
-    'Candidate', on_delete=models.CASCADE,
+    Candidate, on_delete=models.CASCADE,
     )
 
 class CandidateGroup(models.Model):
-    groupPercentage: models.PositiveIntergerField(blank = False)
+    groupPercentage = models.PositiveIntergerField(blank = False)
     candidateList = models.OneToOneField(CandidateList, on_delete=models.CASCADE,)
 
 class Candidate(models.Model):

@@ -17,9 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from propositions.views import PropositionsView
 from votings.views import votings
+from questionnaire.views import questionnaire
+from parlamentarians.views import parlamentarians
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^propositions/', PropositionsView),
     url(r'^votings/', votings),
+    url(r'^questionnaire/', questionnaire),
+    url(r'^parlamentarians/', parlamentarians),
 ]

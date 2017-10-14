@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^propositions/', PropositionsView),
     url(r'^votings/', votings),
+    url(r'^api/', include('candidateRanking.urls'))
     url(r'^questionnaire/', questionnaire),
     url(r'^parlamentarians/', parlamentarians),
 ]

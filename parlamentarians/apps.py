@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ParlamentaryConfig(AppConfig):
-    name = 'parlamentary'
+    name = 'parlamentarians'

@@ -4,4 +4,4 @@ from .models import Parlamentarians
 class ParlamentariansSerializer(serializers.Serializer):
     class Meta:
         model = Parlamentarians
-        fields = ('candidadeName', 'candidateDescription')
+        fields = ('parlamentaryName', 'parlamentaryUF', 'parlamentaryPoliticalParty')

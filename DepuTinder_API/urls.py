@@ -19,12 +19,13 @@ from propositions.views import PropositionsView
 from votings.views import votings
 from questionnaire.views import questionnaire
 from parlamentarians.views import parlamentarians
+from candidateRanking.views import rankingIndex
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^propositions/', PropositionsView),
     url(r'^votings/', votings),
-    url(r'^api/', include('candidateRanking.urls'))
+    url(r'^ranking/', rankingIndex),
     url(r'^questionnaire/', questionnaire),
     url(r'^parlamentarians/', parlamentarians),
 ]

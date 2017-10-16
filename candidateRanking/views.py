@@ -1,17 +1,18 @@
 from django.shortcuts import render
-from rest_framework import viewsets
-from .serializers import RankingSerializer
-from rest_framework.decorators import detail_route
-from .models import Ranking
+from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
 
-class RankingViewSet(viewsets.ModelViewSet):
-    serializer_class = RankingSerializer
+@api_view(['GET'])
 
-    @detail_route(methods=['GET'])
-    def listRanking(self, request, userID):
-        userID = request.query_params['userID']
-        //tratar
-        ranking = Ranking.objects.get(userID = userID)
-        serializer_ranking = RankingSerializer(ranking, many=False).data
-        return Response(serializer_ranking)
+# request parameter must be here
+def rankingIndex(request):
+    rankingResultData = {
+     "data": [
+        {"groupID":90,"candidates":["Armando"]},
+        {"groupID":80,"candidates":["Donelle","Sammy","Thor"]},
+        {"groupID":70,"candidates":["Loise","Burtie"]},
+        {"groupID":60,"candidates":["Alejandrina","Cleveland","Ronda"]}
+     ],
+    }
+    return Response(rankingResultData, status=status.HTTP_200_OK)

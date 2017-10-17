@@ -8,7 +8,7 @@ from rest_framework.response import Response
 # request parameter must be here
 def rankingIndex(request):
     rankingResultData = {
-     "data": [
+     "rankingInfo": [
         {"groupID":90,"candidates":["Armando"]},
         {"groupID":80,"candidates":["Donelle","Sammy","Thor"]},
         {"groupID":70,"candidates":["Loise","Burtie"]},

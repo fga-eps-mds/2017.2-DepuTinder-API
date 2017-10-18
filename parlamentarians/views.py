@@ -1,24 +1,12 @@
+import requests, json
 from django.shortcuts import render
 from .models import Parlamentarians
-from .serializers import ParlamentariansSerializer
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.decorators import parser_classes
-from rest_framework.parsers import JSONParser
-import requests, json
-
+from django.core import serializers
+from django.http import HttpResponse
 @api_view(['GET'])
-@parser_classes((JSONParser,))
-
-def parlamentarians(request, format=None):
+def parlamentarians(request, format=json):
     parlamentarians = Parlamentarians.objects.all()
-
     if parlamentarians:
-        return Response({}, status=status.HTTP_404_NOT_FOUND)
-    else:
-        serializer = ParlamentariansSerializer(parlamentarians)
-        r = requests.get('Parlamentarians',serializer)
-        data = json.loads(r.text)
-
-        return Response(data, status=status.HTTP_201_CREATED)
+        data = serializers.serialize('json', parlamentarians)
+        return HttpResponse(data, content_type='application/json')

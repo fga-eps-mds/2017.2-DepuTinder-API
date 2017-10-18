@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['localhost']
 INSTALLED_APPS = [
     'corsheaders',
     'propositions',
+    'candidateRanking',
     'votings',
     'questionnaire',
     'parlamentarians',

@@ -15,8 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Cors config
-CORS_ORIGIN_ALLOW_ALL = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -25,32 +23,23 @@ CORS_ORIGIN_ALLOW_ALL = True
 SECRET_KEY = 'tu5!u_*ind_=q@55(btbrg$$!8yys7h@yqxq)@h&%0q3re9(7c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
-    'propositions',
-    'candidateRanking',
-    'votings',
-    'questionnaire',
-    'parlamentarians',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,16 +48,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-REST_FRAMEWORK =  {
- # Rest Framework Future Configs
- 'DEFAULT_RENDERER_CLASSES': (
-   'rest_framework.renderers.JSONRenderer',
-  ),
-  'DEFAULT_PARSER_CLASSES': (
-    'rest_framework.parsers.JSONParser',
-  )
-}
 
 ROOT_URLCONF = 'DepuTinder_API.urls'
 

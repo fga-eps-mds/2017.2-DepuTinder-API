@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'propositions',
     'candidateRanking',
     'votings',
+    'users',
     'questionnaire',
     'parlamentarians',
     'django.contrib.admin',

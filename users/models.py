@@ -10,4 +10,5 @@ class Users(models.Model):
 	userEmail = models.CharField(max_length = EMAIL_LENGTH, blank = False)
 	userPassword = models.CharField(max_length = PASSWORD_LENGTH, blank = False)
 	userImage = models.TextField(max_length = IMAGE_LENGTH, blank = True)
+	answersQuestions = models.IntegerField(blank=False)
 

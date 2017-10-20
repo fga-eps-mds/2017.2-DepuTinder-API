@@ -4,4 +4,4 @@ from .models import Answers
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ('userFK', 'propositionFK', 'ansewrType')
+        fields = ('user', 'proposition', 'answerType')

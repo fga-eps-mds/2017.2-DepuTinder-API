@@ -1,13 +1,14 @@
 from django.db import models
+from users.models import Users
+from propositions.models import Propositions
 
 class Answers(models.Model):
-    users = models.ForeignKey(
-        'users.Users',
+    user = models.ForeignKey(
+        Users,
         on_delete=models.CASCADE,
-        related_name='userFK')
-    propositions = models.ForeignKey(
-        'propositions.Propositions',
+        related_name='userID')
+    proposition = models.ForeignKey(
+        Propositions,
         on_delete=models.CASCADE,
-        related_name='propositionFK')
-    answerType = models.CharField(null=True, blank=True, max_length=10) # 1-SIM / 2-NAO / 3-ABSTENHO
-
+        related_name='propositionID')
+    answerType = models.CharField(null=True, blank=True, max_length=100) # 1-SIM / 2-NAO / 3-ABSTENHO

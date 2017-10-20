@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Parlamentarians
 
-class ParlamentariansSerializer(serializers.Serializer):
+class ParlamentariansSerializer(serializers.ModelSerializer):
     class Meta:
         model = Parlamentarians
-        fields = ('parlamentaryName', 'parlamentaryUF', 'parlamentaryPoliticalParty')
+        fields = ('parlamentaryPhotoPath', 'parlamentaryName', 'parlamentaryUF', 'parlamentaryPoliticalParty')

@@ -9,5 +9,5 @@ class Answers(models.Model):
         'propositions.Propositions',
         on_delete=models.CASCADE,
         related_name='propositionFK')
-    ansewrType = models.CharField(null=True, blank=True) # 1-SIM / 2-NAO / 3-ABSTENHO
+    answerType = models.CharField(null=True, blank=True, max_length=10) # 1-SIM / 2-NAO / 3-ABSTENHO
 

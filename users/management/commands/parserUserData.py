@@ -19,4 +19,4 @@ class Command(BaseCommand):
             if (created):
                 self.stdout.write("Usuário " + user.userName + " salvo com sucesso!")
             else:
-                self.stdout.write("Usuário " + user.userName + " salvo com sucesso!")
+                self.stdout.write("Usuário " + user.userName + " não foi salvo no banco de dados!")

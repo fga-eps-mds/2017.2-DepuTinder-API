@@ -7,12 +7,14 @@ class Votings(models.Model):
         'propositions.Propositions',
         on_delete = models.CASCADE,
         related_name = 'propositionID',
-        default=0)
+        default=0,
+        null=True)
 
     candidateID = models.ForeignKey(
         'parlamentarians.Parlamentarians',
         on_delete = models.CASCADE,
         related_name = 'candidateID',
-        default=0)
+        default=0,
+        null=True)
 
     candidateVote = models.IntegerField(blank=False)

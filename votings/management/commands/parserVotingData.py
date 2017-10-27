@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def parseData(self):
         for i in range(10):
-            votings, create = Votings.objects.get_or_create(
+            votings, created = Votings.objects.get_or_create(
                 #Gera inteiro para votação: -1 = NAO / 0 = ME ABSTENHO / 1 = SIM
                 candidateVote = random.randrange(-1,2),
                 #Gera todos os campos de um objeto Parlamentarians
@@ -37,9 +37,9 @@ class Command(BaseCommand):
                 ),
             )
             if (created):
-                self.stdout.write("Voting " + votings.candidateVote + " salvo com sucesso!")
+                self.stdout.write("Voting " + str(votings.candidateVote) + " salvo com sucesso!")
             else:
-                self.stdout.write("Voting " + votings.candidateVote + " erro ao salvar!")
+                self.stdout.write("Voting " + str(votings.candidateVote) + " erro ao salvar!")
 
     #Instancia Propositions e Questionnaire
     def generatePropositionInstance(self, questionnaireID, propositionTitle, propositionSubTitle, propositionDescription, propositionAuthor, propositionLink):

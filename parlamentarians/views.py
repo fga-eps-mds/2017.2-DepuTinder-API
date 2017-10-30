@@ -9,5 +9,7 @@ import json
 @api_view(['GET'])
 def parlamentarians(request):
         parlamentarians = Parlamentarians.objects.all()
+        parlamentary = (Parlamentarians.objects.all()[:1].get())
+        print(parlamentary.parlamentaryPhotoPath)
         serializer = ParlamentariansSerializer(parlamentarians, many=True)
         return JsonResponse(serializer.data, safe=False)

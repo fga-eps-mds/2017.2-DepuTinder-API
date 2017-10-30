@@ -7,11 +7,6 @@ AUTHOR_LENGTH = 50
 LINK_LENGTH = 5000
 
 class Propositions(models.Model):
-    questionnaire = models.ForeignKey(
-        'questionnaire.Questionnaire',
-        on_delete=models.CASCADE,
-        related_name='propositionID',
-        default=0)
     propositionTitle = models.CharField(max_length=TITLE_LENGTH, blank=True)
     propositionSubTitle = models.CharField(max_length=SUBTITLE_LENGTH, blank=True)
     propositionDescription = models.CharField(max_length=DESCRIPTION_LENGTH, blank=True)

@@ -1,5 +1,6 @@
 from question.models import Question
 from propositions.models import Propositions
+from questionnaire.models import Questionnaire
 from django.core.management import BaseCommand
 
 NUMBER_OF_QUESTIONS = 10
@@ -10,9 +11,12 @@ class Command(BaseCommand):
 
     def parseData(self):
         propositions = Propositions.objects.all()
+        questionnaire = Questionnaire.objects.get()
 
         for proposition in propositions:
             question, created = Question.objects.get_or_create(
+                proposition = proposition,
+                questionnaire = questionnaire,
                 questionTitle = proposition.propositionTitle,
                 questionSubtitle = proposition.propositionSubTitle,
                 questionDescription = proposition.propositionDescription,
@@ -20,7 +24,7 @@ class Command(BaseCommand):
                 questionLink = proposition.propositionLink,
             )
 
-        if (created):
-            self.stdout.write("Questao " + question.questionTitle + " salva com sucesso!")
-        else:
-            self.stdout.write("Questao " + question.questionTitle + " nao foi salva no banco de dados!")
+            if (created):
+                self.stdout.write("Questao " + question.questionTitle + " salva com sucesso!")
+            else:
+                self.stdout.write("Questao " + question.questionTitle + " nao foi salva no banco de dados!")

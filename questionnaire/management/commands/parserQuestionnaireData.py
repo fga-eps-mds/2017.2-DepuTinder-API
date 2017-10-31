@@ -4,19 +4,16 @@ from django.core.management import BaseCommand
 from faker import Faker
 from random import randint
 
-MIN_ID_QUESTIONNAIRE = 0
-MAX_ID_QUESTIONNAIRE = 1
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.parseData()
 
     def parseData(self):
-
-        proposition = (Propositions.objects.all()[:10].filter())
+        proposition = Propositions.objects.all()
 
         # Data to be parsed
         questionnaire, created = Questionnaire.objects.get_or_create(
-            questionnaireID = randint(MIN_ID_QUESTIONNAIRE, MAX_ID_QUESTIONNAIRE)
+            questionnaireID = 0
         )
 
         if (created):

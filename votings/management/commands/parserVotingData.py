@@ -13,16 +13,16 @@ class Command(BaseCommand):
         self.parseData()
 
     def parseData(self):
-        #Para cada parlamentar são gerados 10 votos, cada voto em uma proposição diferente que tem seu id incrementado
-        #com a variavel j
-        for i in range(10):#trocar 10 pelo numero de parlamentares existentes
-            parlamentary = Parlamentarians.objects.get(id=i)
-            for j in range(10):
+        parlamentarys = Parlamentarians.objects.all()
+        propositions = Propositions.objects.all()
+
+        for parlamentary in parlamentarys:
+            for proposition in propositions:
                 votings, created = Votings.objects.get_or_create(
                     #Gera inteiro para votação: -1 = NAO / 0 = ME ABSTENHO / 1 = SIM
                     candidateVote = random.randrange(-1,2),
                     candidateID = parlamentary,
-                    propositionID = Propositions.objects.get(id=j)
+                    propositionID = proposition,
                 )
                 if (created):
                     self.stdout.write("Voting " + str(votings.candidateVote) + " salvo com sucesso!")

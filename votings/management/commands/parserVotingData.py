@@ -10,7 +10,7 @@ fake = Faker()
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        self.get()
+        self.parseData()
 
     def parseData(self):
         parlamentarys = Parlamentarians.objects.all()

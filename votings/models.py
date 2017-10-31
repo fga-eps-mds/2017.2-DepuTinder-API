@@ -6,7 +6,7 @@ class Votings(models.Model):
     propositionID = models.ForeignKey(
         'propositions.Propositions',
         on_delete = models.CASCADE,
-        related_name = 'propositionID',
+        related_name = '%(class)s_id',
         default=0,
         null=True)
 

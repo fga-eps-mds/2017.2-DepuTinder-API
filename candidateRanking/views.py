@@ -12,11 +12,27 @@ from parlamentarians.models import Parlamentarians
 def rankingIndex(request):
     rankingResultData = {
      "rankingInfo": [
-        {"groupID":90,"candidates":["Armando"]},
-        {"groupID":80,"candidates":["Donelle","Sammy","Thor"]},
-        {"groupID":70,"candidates":["Loise","Burtie"]},
-        {"groupID":60,"candidates":["Alejandrina","Cleveland","Ronda"]}
-     ],
+        {"groupID":90,"candidates":[
+        {'fields': { 'name': "ADALBERTO CAVALCANTI",
+                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
+                     'uf': "PE",
+                     'party': "AVANTE"}}]},
+        {"groupID":80,"candidates":[
+        {'fields': { 'name': "ADALBERTO CAVALCANTI",
+                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
+                     'uf': "PE",
+                     'party': "AVANTE"}}]},
+        {"groupID":70,"candidates":[
+        {'fields': { 'name': "ADALBERTO CAVALCANTI",
+                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
+                     'uf': "PE",
+                     'party': "AVANTE"}}]},
+        {"groupID":60,"candidates":[
+        {'fields': { 'name': "ADALBERTO CAVALCANTI",
+                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
+                     'uf': "PE",
+                     'party': "AVANTE"}}]},
+        ],
     }
     return Response(rankingResultData, status=status.HTTP_200_OK)
 

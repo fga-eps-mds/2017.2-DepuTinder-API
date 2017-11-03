@@ -6,12 +6,12 @@ from django.core.management import BaseCommand
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        self.parseData()
+
+    def parseData(self):
         parlamentariansFile = open("parlamentariansData.csv", "r")
         csv_reader = csv.reader(parlamentariansFile)
         row = next(csv_reader) # Jumping the header
-        self.parseData(row, csv_reader)
-
-    def parseData(self, row, csv_reader):
         for row in csv_reader:
             parlamentary, created = Parlamentarians.objects.get_or_create(
                 parlamentaryPhotoPath = row[0],

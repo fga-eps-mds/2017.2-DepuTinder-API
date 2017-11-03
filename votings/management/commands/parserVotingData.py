@@ -13,10 +13,10 @@ class Command(BaseCommand):
         self.parseData()
 
     def parseData(self):
-        parlamentarys = Parlamentarians.objects.all()
+        parlamentarians = Parlamentarians.objects.all()
         propositions = Propositions.objects.all()
 
-        for parlamentary in parlamentarys:
+        for parlamentary in parlamentarians:
             for proposition in propositions:
                 votings, created = Votings.objects.get_or_create(
                     #Gera inteiro para votação: -1 = NAO / 0 = ME ABSTENHO / 1 = SIM

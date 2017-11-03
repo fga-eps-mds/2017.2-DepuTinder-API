@@ -18,11 +18,3 @@ def questionnaire(request):
         data = json.loads(r.text)
 
         return Response(data, status=status.HTTP_201_CREATED)
-
-@api_view(['PUT'])
-def answeredQuestions(request):
-    if(request.data):
-        rankingIndex(request.data)
-        return Response(status=status.HTTP_200_OK)
-    else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)

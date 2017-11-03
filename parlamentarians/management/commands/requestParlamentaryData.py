@@ -9,7 +9,7 @@ class Command(BaseCommand):
         self.stdout.write("Fazendo request dos dados no portal da câmara")
         for i in range(1, 7):
             page = str(i)
-            url_path = "https://dadosabertos.camara.leg.br/api/v2/deputados?pagina="+page+"&itens=100"
+            url_path = "https://dadosabertos.camara.leg.br/api/v2/deputados?pagina="+page+"&itens=5"
             parlamentariansData = self.request_data(url_path)
             csv_file = self.populate_csv_file(page)
             self.parsing_data_to_csv(csv_file, parlamentariansData)

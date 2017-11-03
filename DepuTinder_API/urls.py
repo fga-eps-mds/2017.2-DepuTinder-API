@@ -21,7 +21,7 @@ from questionnaire.views import questionnaire
 from parlamentarians.views import parlamentarians
 from users.views import users
 from candidateRanking.views import rankingIndex
-from questionnaire.views import answeredQuestions
+from candidateRanking.views import answeredQuestions
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

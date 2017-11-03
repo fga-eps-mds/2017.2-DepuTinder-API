@@ -22,7 +22,7 @@ def questionnaire(request):
 @api_view(['PUT'])
 def answeredQuestions(request):
     if(request.data):
-        print(request.data)
+        rankingIndex(request.data)
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)

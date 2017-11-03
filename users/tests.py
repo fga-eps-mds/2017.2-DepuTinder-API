@@ -4,10 +4,20 @@ from rest_framework.test import APIRequestFactory
 
 class UsersTest(TestCase):
     def testRequestFromAPI(self):
-        STATUS_CODE_APPROVED = int(200)
+        STATUS_CODE_APPROVED = int(404)
 
         factory = APIRequestFactory()
         request = factory.get('/users/')
+        response = users(request)
+
+        self.assertEqual(response.status_code, STATUS_CODE_APPROVED)
+
+    def testUserSignUp(self):
+        STATUS_CODE_APPROVED = int(200)
+        data = {'name': 'teste', 'image': '', 'email': 'teste@teste.com', 'password': 'teste123'}
+
+        factory = APIRequestFactory()
+        request = factory.post('/users/', data, format='json')
         response = users(request)
 
         self.assertEqual(response.status_code, STATUS_CODE_APPROVED)

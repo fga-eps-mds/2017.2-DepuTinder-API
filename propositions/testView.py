@@ -4,7 +4,7 @@ from rest_framework.test import APIRequestFactory
 
 class PropositionsViewTest(TestCase):
   def testRequestFromAPI(self):
-    STATUS_CODE_APPROVED = int(201)
+    STATUS_CODE_APPROVED = int(200)
 
     factory = APIRequestFactory()
     request = factory.get('https://api.myjson.com/bins/m7f4x')
@@ -13,7 +13,7 @@ class PropositionsViewTest(TestCase):
     self.assertEqual(response.status_code, STATUS_CODE_APPROVED)
 
   def testRequestFromApp(self):
-    STATUS_CODE_APPROVED = int(201)
+    STATUS_CODE_APPROVED = int(200)
 
     factory = APIRequestFactory()
     request = factory.get('/propositions')

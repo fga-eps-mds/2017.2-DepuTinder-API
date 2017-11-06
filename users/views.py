@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core import serializers
 from rest_framework.decorators import api_view
+from cryptography.fernet import Fernet
 import requests, json
 
 @api_view(['GET', 'POST'])
@@ -21,10 +22,14 @@ def users(request):
 
     elif request.method == 'POST':
         if request.data:
+
+            key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
+            cipher_suite = Fernet(key)
+
             user, created = Users.objects.get_or_create(
                 userName = request.data['name'],
                 userImage = '',
-                userPassword = request.data['password'],
+                userPassword = cipher_suite.encrypt(request.data['password'].encode('UTF-8')),
                 userEmail = request.data['email'],
             )
 
@@ -35,20 +40,31 @@ def users(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
+@api_view(['GET'])
 def login(request):
 
-    print("Entrou!")
-    if request.method == 'POST':
+    email = request.GET.get('userEmail')
+    password = request.GET.get('userPassword')
 
-        users = Users.objects.filter(userEmail=request.data.get("userEmail"))
-        if len(users) == 0:
-            print("Usuario nao encontrado")
+    key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
+    cipher_suite = Fernet(key)
+    encrypt_password = cipher_suite.encrypt('calebe'.encode('UTF-8'))
+
+    try:
+        user = Users.objects.get(userEmail=email)
+    except:
+        return Response({"error": "Email not found"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        userPassword = user.userPassword
+        userPassword = cipher_suite.decrypt(userPassword.encode('UTF-8'))
+        userPassword = userPassword.decode('UTF-8')
+
+        if userPassword == password:
+            response = {"userName": user.userName,
+                       "userImage": user.userImage,
+                       "userEmail": user.userEmail,
+                       }
+
+            return Response(response, status=status.HTTP_200_OK)
         else:
-            print("Usuario encontrado")
-            if users.first().userPassword == request.data.get("userPassword"):
-                print("senha bate")
-            else:
-                print("senha nao bate")
-
-        return Response(status=status.HTTP_200_OK)
+            return Response({"error": "Invalid Password"}, status=status.HTTP_400_BAD_REQUEST)

@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from votings.models import Votings
 from parlamentarians.models import Parlamentarians
+from candidateRanking.models import CandidateRanking
 
 @api_view(['GET'])
 
@@ -12,22 +13,22 @@ from parlamentarians.models import Parlamentarians
 def rankingIndex(request):
     rankingResultData = {
      "rankingInfo": [
-        {"groupID":90,"candidates":[
+        {"groupID":"70-100","candidates":[
         {'fields': { 'name': "ADALBERTO CAVALCANTI",
                      'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
                      'uf': "PE",
                      'party': "AVANTE"}}]},
-        {"groupID":80,"candidates":[
+        {"groupID":"50 - 70","candidates":[
         {'fields': { 'name': "ADALBERTO CAVALCANTI",
                      'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
                      'uf': "PE",
                      'party': "AVANTE"}}]},
-        {"groupID":70,"candidates":[
+        {"groupID":"30-50","candidates":[
         {'fields': { 'name': "ADALBERTO CAVALCANTI",
                      'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
                      'uf': "PE",
                      'party': "AVANTE"}}]},
-        {"groupID":60,"candidates":[
+        {"groupID":"10 - 30","candidates":[
         {'fields': { 'name': "ADALBERTO CAVALCANTI",
                      'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
                      'uf': "PE",
@@ -52,7 +53,9 @@ def generate_ranking(answeredQuestions):
     high_match = []
     medium_match = []
     low_match = []
-    generate_match(parlamentarians, answeredQuestions, super_match, high_match, medium_match, low_match)
+    generate_match(parlamentarians, answeredQuestions,
+                   super_match, high_match, medium_match,
+                   low_match)
     generate_results(super_match, high_match, medium_match, low_match)
 
 
@@ -83,5 +86,11 @@ def generate_results(super_match, high_match, medium_match, low_match):
     "30% - 50%": toJson(medium_match),
     "10% - 30%": toJson(low_match),
     }
-    print(results)
-    return results
+
+    ranking, created = CandidateRanking.objects.get_or_create(
+        ranking = results
+    )
+    if (created):
+        print("Ranking criado com sucesso " )
+    else:
+        print("Ranking não pôde ser criado " )

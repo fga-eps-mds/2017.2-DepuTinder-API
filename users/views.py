@@ -34,3 +34,21 @@ def users(request):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def login(request):
+
+    print("Entrou!")
+    if request.method == 'POST':
+
+        users = Users.objects.filter(userEmail=request.data.get("userEmail"))
+        if len(users) == 0:
+            print("Usuario nao encontrado")
+        else:
+            print("Usuario encontrado")
+            if users.first().userPassword == request.data.get("userPassword"):
+                print("senha bate")
+            else:
+                print("senha nao bate")
+
+        return Response(status=status.HTTP_200_OK)

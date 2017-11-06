@@ -1,6 +1,7 @@
 from users.models import Users
 from django.core.management import BaseCommand
 from faker import Faker
+from cryptography.fernet import Fernet
 
 fake = Faker()
 
@@ -9,11 +10,15 @@ class Command(BaseCommand):
         self.parseData()
 
     def parseData(self):
+        key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
+        cipher_suite = Fernet(key)
+        encrypt_password = cipher_suite.encrypt(fake.password().encode('UTF-8'))
+
         for i in range(10):
             user, created = Users.objects.get_or_create(
                 userName = fake.name(),
                 userImage = fake.text(),
-                userPassword = fake.password(),
+                userPassword = encrypt_password,
                 userEmail = fake.email(),
             )
             if (created):

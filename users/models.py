@@ -7,6 +7,6 @@ IMAGE_LENGTH = 5000
 
 class Users(models.Model):
 	userName = models.CharField(max_length = NAME_LENGTH, blank = False)
-	userEmail = models.CharField(max_length = EMAIL_LENGTH, blank = False)
+	userEmail = models.CharField(max_length = EMAIL_LENGTH, blank = False, unique=True)
 	userPassword = models.CharField(max_length = PASSWORD_LENGTH, blank = False)
 	userImage = models.TextField(max_length = IMAGE_LENGTH, blank = True)

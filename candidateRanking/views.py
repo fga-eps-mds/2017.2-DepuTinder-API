@@ -1,4 +1,5 @@
 import json
+import simplejson
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -6,36 +7,27 @@ from rest_framework.response import Response
 from votings.models import Votings
 from parlamentarians.models import Parlamentarians
 from candidateRanking.models import CandidateRanking
+from django.http import JsonResponse
 
 @api_view(['GET'])
 
 # request parameter must be here
 def rankingIndex(request):
+    ranking = CandidateRanking.objects.all()[:1].get()
+    response = simplejson.loads(ranking.ranking)
+    low_match = simplejson.loads(response['10% - 30%'])
+    medium_match = simplejson.loads(response['30% - 50%'])
+    high_match = simplejson.loads(response['50% - 70%'])
+    super_match = simplejson.loads(response['70% - 100%'])
     rankingResultData = {
      "rankingInfo": [
-        {"groupID":"70-100","candidates":[
-        {'fields': { 'name': "ADALBERTO CAVALCANTI",
-                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
-                     'uf': "PE",
-                     'party': "AVANTE"}}]},
-        {"groupID":"50 - 70","candidates":[
-        {'fields': { 'name': "ADALBERTO CAVALCANTI",
-                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
-                     'uf': "PE",
-                     'party': "AVANTE"}}]},
-        {"groupID":"30-50","candidates":[
-        {'fields': { 'name': "ADALBERTO CAVALCANTI",
-                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
-                     'uf': "PE",
-                     'party': "AVANTE"}}]},
-        {"groupID":"10 - 30","candidates":[
-        {'fields': { 'name': "ADALBERTO CAVALCANTI",
-                     'photoPath':"http://www.camara.leg.br/internet/deputado/bandep/178914.jpg",
-                     'uf': "PE",
-                     'party': "AVANTE"}}]},
+        {"groupID":"70-100","candidates": super_match},
+        {"groupID":"50 - 70","candidates": medium_match},
+        {"groupID":"30-50","candidates": high_match},
+        {"groupID":"10 - 30","candidates": super_match},
         ],
     }
-    return Response(rankingResultData, status=status.HTTP_200_OK)
+    return JsonResponse(rankingResultData, safe=False)
 
 @api_view(['PUT'])
 def answeredQuestions(request):
@@ -80,13 +72,16 @@ def toJson(parlamentary):
     return json.dumps(parlamentary, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 def generate_results(super_match, high_match, medium_match, low_match):
-    results = {
+    ranking_match = {
     "70% - 100%": toJson(super_match),
     "50% - 70%": toJson(high_match),
     "30% - 50%": toJson(medium_match),
     "10% - 30%": toJson(low_match),
     }
+    results = json.dumps(ranking_match)
+    print (results)
 
+    CandidateRanking.objects.all().delete()
     ranking, created = CandidateRanking.objects.get_or_create(
         ranking = results
     )

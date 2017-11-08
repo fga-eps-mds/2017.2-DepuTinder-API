@@ -48,7 +48,6 @@ def login(request):
 
     key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
     cipher_suite = Fernet(key)
-    encrypt_password = cipher_suite.encrypt('calebe'.encode('UTF-8'))
 
     try:
         user = Users.objects.get(userEmail=email)

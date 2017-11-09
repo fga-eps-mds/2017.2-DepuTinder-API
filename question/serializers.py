@@ -8,5 +8,4 @@ class QuestionSerializer(serializers.Serializer):
             'questionTitle',
             'questionSubtitle',
             'questionDescription',
-            'questionAuthor',
-            'questionLink')
+            'questionAuthor')

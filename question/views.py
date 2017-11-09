@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from .models import Question
 from .serializers import QuestionSerializer
@@ -20,13 +21,14 @@ def question(request):
             return Response(serializer, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
+        print(request.data)
+
         if request.data:
             question, created = Question.objects.get_or_create(
                 questionTitle = request.data['questionTitle'],
                 questionSubtitle = request.data['questionSubtitle'],
                 questionDescription = request.data['questionDescription'],
                 questionAuthor = request.data['questionAuthor'],
-                questionLink = request.data['questionLink'],
             )
 
             if created:

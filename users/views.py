@@ -40,11 +40,11 @@ def users(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['PUT'])
 def login(request):
 
-    email = request.GET.get('userEmail')
-    password = request.GET.get('userPassword')
+    email = request.data['userEmail']
+    password = request.data['userPassword']
 
     key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
     cipher_suite = Fernet(key)

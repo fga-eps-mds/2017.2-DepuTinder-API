@@ -22,6 +22,7 @@ from parlamentarians.views import parlamentarians
 from users.views import users
 from candidateRanking.views import rankingIndex
 from candidateRanking.views import answeredQuestions
+from question.views import question
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
     url(r'^users/', users),
     url(r'^parlamentarians/', parlamentarians),
     url(r'^sendAnsweredQuestions/', answeredQuestions),
+    url(r'^question/', question),
 ]

@@ -29,6 +29,7 @@ def question(request):
                 questionSubtitle = request.data['questionSubtitle'],
                 questionDescription = request.data['questionDescription'],
                 questionAuthor = request.data['questionAuthor'],
+                proposition = request.data['propositionFK'],
             )
 
             if created:

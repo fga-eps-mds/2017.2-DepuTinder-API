@@ -1,6 +1,7 @@
 
 from django.shortcuts import render
 from .models import Question
+from  propositions.models import Propositions
 from .serializers import QuestionSerializer
 from rest_framework.response import Response
 from rest_framework import status
@@ -21,17 +22,18 @@ def question(request):
             return Response(serializer, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
-        print(request.data)
 
         if request.data:
+            propo = Propositions.objects.get(propositionTitle = request.data['propositionFK'])
+            print(propo)
             question, created = Question.objects.get_or_create(
                 questionTitle = request.data['questionTitle'],
                 questionSubtitle = request.data['questionSubtitle'],
                 questionDescription = request.data['questionDescription'],
                 questionAuthor = request.data['questionAuthor'],
-                proposition = request.data['propositionFK'],
+                proposition = propo,
             )
-
+            
             if created:
                 return Response(status=status.HTTP_200_OK)
             else:

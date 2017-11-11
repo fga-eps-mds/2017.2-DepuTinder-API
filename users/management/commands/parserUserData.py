@@ -15,6 +15,10 @@ class Command(BaseCommand):
         user.save()
 
     def parseData(self):
+        key = b'8YECmO6MCuZ0Lm887BkLlhqF_SvVb58TvbPohNfTwrk='
+        cipher_suite = Fernet(key)
+        encrypt_password = cipher_suite.encrypt(fake.password().encode('UTF-8'))
+
         for i in range(10):
             user, created = User.objects.get_or_create(
                 username = fake.name(),

@@ -27,9 +27,8 @@ def users(request):
         if request.data:
 
             user = User.objects.filter(email=request.data['userEmail'])
-            user2 = User.objects.filter(username=request.data['userName'])
 
-            if len(user) > 0 and len(user2) > 0:
+            if len(user) > 0:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             else:
                 user = User.objects.create_user(request.data['userName'], request.data['userEmail'], request.data['userPassword'])

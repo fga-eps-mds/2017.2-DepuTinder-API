@@ -32,6 +32,7 @@ class Command(BaseCommand):
         question.parseData(self)
         logger.info("Parser de questões finalizado!")
         logger.info("Iniciando parser de usuários")
+        user.admin(self)
         user.parseData(self)
         logger.info("Parser de usuários finalizado!")
         logger.info("Iniciando parser de votações")

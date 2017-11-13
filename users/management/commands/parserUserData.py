@@ -10,24 +10,29 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.parseData()
 
-    def oneUser(self):
-        user = User.objects.create_user('calebe', 'c@c.com', 'calebe')
+    def admin(self):
+        user = User.objects.create_user(username='admin', email='admin@admin.com', password='admin123', is_superuser=True)
         user.save()
+
+        users, created = Users.objects.get_or_create(
+            user = user,
+            userImage = fake.text(),
+        )
+
+        if created:
+            print(user.username)
 
     def parseData(self):
         for i in range(10):
-            user, created = User.objects.get_or_create(
-                username = fake.name(),
-                password = fake.password(),
-                email = fake.email(),
-            )
+            user = User.objects.create_user(username=fake.name(), email=fake.password(), password=fake.email())
+            user.save()
 
-            users, created2 = Users.objects.get_or_create(
+            users, created = Users.objects.get_or_create(
                 user = user,
                 userImage = fake.text(),
             )
 
-            if created and created2:
+            if created:
                 self.stdout.write("Usuário " + users.user.username + " salvo com sucesso!")
             else:
                 self.stdout.write("Usuário " + users.user.username + " não foi salvo no banco de dados!")

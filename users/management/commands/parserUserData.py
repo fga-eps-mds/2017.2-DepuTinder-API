@@ -10,9 +10,21 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.parseData()
 
-    def oneUser(self):
-        user = User.objects.create_user('calebe', 'c@c.com', 'calebe')
-        user.save()
+    def admin(self):
+        user, created = User.objects.get_or_create(
+            username = 'admin',
+            password = 'admin123',
+            email = 'admin@admin.com',
+            is_superuser = True,
+        )
+
+        users, created = Users.objects.get_or_create(
+            user = user,
+            userImage = fake.text(),
+        )
+
+        if created:
+            print(user.username)
 
     def parseData(self):
         for i in range(10):

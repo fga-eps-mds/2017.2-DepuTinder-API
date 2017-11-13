@@ -33,7 +33,7 @@ class Command(BaseCommand):
         logger.info("Parser de questões finalizado!")
         logger.info("Iniciando parser de usuários")
         user.admin(self)
-        user.parserData(self)
+        user.parseData(self)
         logger.info("Parser de usuários finalizado!")
         logger.info("Iniciando parser de votações")
         voting.parseData(self)

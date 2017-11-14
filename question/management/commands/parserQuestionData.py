@@ -21,7 +21,6 @@ class Command(BaseCommand):
                 questionSubtitle = proposition.propositionSubTitle,
                 questionDescription = proposition.propositionDescription,
                 questionAuthor = proposition.propositionAuthor,
-                questionLink = proposition.propositionLink,
             )
 
             if (created):

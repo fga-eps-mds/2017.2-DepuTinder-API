@@ -2,6 +2,9 @@ from rest_framework import serializers
 from .models import Question
 
 class QuestionSerializer(serializers.Serializer):
+    propositionFK = serializers.RelatedField(source='proposition', read_only=True)
+    questionnaireFK = serializers.RelatedField(source='questionnaire', read_only=True)
+
     class Meta:
         model = Question
         fields = (
@@ -9,4 +12,5 @@ class QuestionSerializer(serializers.Serializer):
             'questionSubtitle',
             'questionDescription',
             'questionAuthor',
-            'questionLink')
+            'propositionFK',
+            'questionnaireFK')

@@ -1,9 +1,13 @@
 from rest_framework import serializers
 from .models import Question
+from propositions.serializers import PropositionsSerializer
 
 class QuestionSerializer(serializers.Serializer):
-    propositionFK = serializers.RelatedField(source='proposition', read_only=True)
-    questionnaireFK = serializers.RelatedField(source='questionnaire', read_only=True)
+    questionTitle = serializers.CharField()
+    questionSubtitle = serializers.CharField()
+    questionDescription = serializers.CharField()
+    questionAuthor = serializers.CharField()
+    propositionFK = serializers.ReadOnlyField()
 
     class Meta:
         model = Question
@@ -12,5 +16,4 @@ class QuestionSerializer(serializers.Serializer):
             'questionSubtitle',
             'questionDescription',
             'questionAuthor',
-            'propositionFK',
-            'questionnaireFK')
+            'propositionFK',)

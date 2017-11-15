@@ -24,3 +24,7 @@ class Question(models.Model):
     questionSubtitle = models.CharField(max_length=SUBTITLE_LENGTH, blank=True)
     questionDescription = models.CharField(max_length=DESCRIPTION_LENGTH, blank=True)
     questionAuthor = models.CharField(max_length=AUTHOR_LENGTH, blank=True)
+
+    @property
+    def propositionFK(self):
+        return self.proposition.id

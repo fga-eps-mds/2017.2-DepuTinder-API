@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.4"
+
+env:
+  - DJANGO_VERSION=1.11.6
+
+# command to install dependencies
+install:
+  - pip install -q Django==$DJANGO_VERSION
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - python manage.py test

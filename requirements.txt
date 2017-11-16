@@ -5,3 +5,4 @@ requests
 Faker
 StringGenerator
 cryptography
+simplejson

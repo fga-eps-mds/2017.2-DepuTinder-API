@@ -9,8 +9,9 @@ from django.core import serializers
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import requests, json
+from users.models import Users
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):
 
     if request.method == 'GET':
@@ -61,3 +62,8 @@ def users(request):
             return JsonResponse(seri)
         else:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        if request.data:
+            print(request.data)
+            u = User.objects.get(email=request.data['userEmail']).delete()

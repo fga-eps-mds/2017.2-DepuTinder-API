@@ -14,6 +14,7 @@ from users.models import Users
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):
 
+    #method to GET all users from API
     if request.method == 'GET':
         users = Users.objects.all()
 
@@ -24,6 +25,7 @@ def users(request):
         else:
             return JsonResponse(seri, safe=False)
 
+    #method to POST a new User in API
     elif request.method == 'POST':
         if request.data:
 
@@ -47,6 +49,7 @@ def users(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    #method to update an user from API
     elif request.method == 'PUT':
         u = User.objects.get(email=request.data['userEmail'])
         user_authenticate = authenticate(username=u.username, password=request.data['userPassword'])

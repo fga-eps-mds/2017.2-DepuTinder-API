@@ -66,4 +66,5 @@ def users(request):
     elif request.method == 'DELETE':
         if request.data:
             print(request.data)
-            u = User.objects.get(email=request.data['userEmail']).delete()
+            deleteUser = User.objects.get(email=request.data['userEmail']).delete()
+            return Response(status=status.HTTP_200_OK)

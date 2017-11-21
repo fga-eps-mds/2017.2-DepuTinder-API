@@ -11,12 +11,10 @@ class Command(BaseCommand):
 
     def parseData(self):
         propositions = Propositions.objects.all()
-        questionnaire = Questionnaire.objects.get()
 
         for proposition in propositions:
             question, created = Question.objects.get_or_create(
                 proposition = proposition,
-                questionnaire = questionnaire,
                 questionTitle = proposition.propositionTitle,
                 questionSubtitle = proposition.propositionSubTitle,
                 questionDescription = proposition.propositionDescription,

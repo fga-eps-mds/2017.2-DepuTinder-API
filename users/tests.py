@@ -14,7 +14,7 @@ class UsersTest(TestCase):
 
     def testUserSignUp(self):
         STATUS_CODE_APPROVED = int(200)
-        data = {'name': 'teste', 'image': '', 'email': 'teste@teste.com', 'password': 'teste123'}
+        data = {'userName': 'teste', 'userImage': '', 'userEmail': 'teste@teste.com', 'userPassword': 'teste123'}
 
         factory = APIRequestFactory()
         request = factory.post('/users/', data, format='json')

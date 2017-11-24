@@ -1,5 +1,9 @@
 from django.db import models
+from question.models import Question
 
 class Questionnaire(models.Model):
-    questionnaireID = models.PositiveIntegerField(blank=False, primary_key=True)
-    questionsTotal = models.PositiveIntegerField(blank=False, default=10)
+
+    questionsFK = models.ManyToManyField(Question)
+
+    def __str__(self):
+        return self.questionsFK

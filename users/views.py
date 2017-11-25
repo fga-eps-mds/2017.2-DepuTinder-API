@@ -14,6 +14,7 @@ from users.models import Users
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):
 
+    #method to GET all users from API
     if request.method == 'GET':
         users = User.objects.all()
 
@@ -24,6 +25,7 @@ def users(request):
         else:
             return JsonResponse(seri, safe=False)
 
+    #method to POST a new User in API
     elif request.method == 'POST':
         if request.data:
 
@@ -47,6 +49,7 @@ def users(request):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    #method to update an user from API
     elif request.method == 'PUT':
         u = User.objects.filter(email=request.data['userEmail'])
 
@@ -75,3 +78,26 @@ def users(request):
             print(request.data)
             deleteUser = User.objects.get(email=request.data['userEmail']).delete()
             return Response(status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def updateUser(request):
+    u = User.objects.filter(email=request.data['oldUserEmail'])
+
+    if not u:
+        return JsonResponse({"status":500, "message": "Email não existe!"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        user_authenticate = authenticate(username=u[0].username, password=request.data['oldUserPassword'])
+        if user_authenticate is not None:
+            user = Users.objects.get(user=user_authenticate.id)
+            u[0].username = request.data['userName']
+            u[0].email = request.data['userEmail']
+            print(request.data['userPassword'])
+            if(request.data['userPassword'] != ''):
+                u[0].set_password(request.data['userPassword'])
+            u[0].save()
+            print(u[0].username)
+            print(u[0].email)
+            print(u[0].password)
+            return JsonResponse({"status":400, "message": "Email ou senha incorretos"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return JsonResponse({"status":400, "message": "Email ou senha incorretos"}, status=status.HTTP_400_BAD_REQUEST)

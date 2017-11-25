@@ -37,3 +37,22 @@ def question(request):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def updateQuestion(request):
+    q = Question.objects.filter(questionTitle=request.data['questionTitle'])
+
+    if not q:
+        return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        questionn = Questionnaire.objects.get(questionnaire = request.data['questionnaireFK'])
+        question_authenticate = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
+        if question_authenticate is not None:
+            question = Question.objects.get(question=question_authenticate.id)
+            q[0].questionn = request.data['questionnaireFK']
+            print(request.data['questionnaireFK'])
+            q[0].save()
+            print(q[0].questionnaire)
+            return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)

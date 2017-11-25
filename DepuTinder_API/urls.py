@@ -20,6 +20,7 @@ from votings.views import votings
 from questionnaire.views import questionnaire
 from parlamentarians.views import parlamentarians
 from users.views import users
+from users.views import updateUser
 from candidateRanking.views import rankingIndex
 from candidateRanking.views import answeredQuestions
 from question.views import question
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^ranking/', rankingIndex),
     url(r'^questionnaire/', questionnaire),
     url(r'^users/', users),
+    url(r'^updateUser/', updateUser),
     url(r'^parlamentarians/', parlamentarians),
     url(r'^sendAnsweredQuestions/', answeredQuestions),
     url(r'^question/', question),

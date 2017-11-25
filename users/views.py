@@ -78,3 +78,26 @@ def users(request):
             print(request.data)
             deleteUser = User.objects.get(email=request.data['userEmail']).delete()
             return Response(status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def updateUser(request):
+    u = User.objects.filter(email=request.data['oldUserEmail'])
+
+    if not u:
+        return JsonResponse({"status":500, "message": "Email não existe!"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        user_authenticate = authenticate(username=u[0].username, password=request.data['oldUserPassword'])
+        if user_authenticate is not None:
+            user = Users.objects.get(user=user_authenticate.id)
+            u[0].username = request.data['userName']
+            u[0].email = request.data['userEmail']
+            print(request.data['userPassword'])
+            if(request.data['userPassword'] != ''):
+                u[0].set_password(request.data['userPassword'])
+            u[0].save()
+            print(u[0].username)
+            print(u[0].email)
+            print(u[0].password)
+            return JsonResponse({"status":400, "message": "Email ou senha incorretos"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return JsonResponse({"status":400, "message": "Email ou senha incorretos"}, status=status.HTTP_400_BAD_REQUEST)

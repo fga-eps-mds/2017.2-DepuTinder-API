@@ -14,6 +14,12 @@ class Question(models.Model):
         related_name='proposition',
         default=0
     )
+    questionnaire = models.ForeignKey(
+        'questionnaire.Questionnaire',
+        on_delete=models.CASCADE,
+        related_name='questionnaire',
+        default=0
+    )
     questionTitle = models.CharField(max_length=TITLE_LENGTH, blank=True)
     questionSubtitle = models.CharField(max_length=SUBTITLE_LENGTH, blank=True)
     questionDescription = models.CharField(max_length=DESCRIPTION_LENGTH, blank=True)
@@ -22,3 +28,7 @@ class Question(models.Model):
     @property
     def propositionFK(self):
         return self.proposition.id
+
+    @property
+    def questionnaireFK(self):
+        return self.questionnaire.id

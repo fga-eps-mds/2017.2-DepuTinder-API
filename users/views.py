@@ -9,12 +9,13 @@ from django.core import serializers
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import requests, json
+from users.models import Users
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):
 
     if request.method == 'GET':
-        users = Users.objects.all()
+        users = User.objects.all()
 
         seri = serializers.serialize('json', list(users))
 
@@ -47,17 +48,30 @@ def users(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'PUT':
-        u = User.objects.get(email=request.data['userEmail'])
-        user_authenticate = authenticate(username=u.username, password=request.data['userPassword'])
-        user = Users.objects.get(user=user_authenticate.id)
+        u = User.objects.filter(email=request.data['userEmail'])
 
-        if user is not None:
-            seri = {
-                "userName": user.user.username,
-                "userEmail": user.user.email,
-                "userImage": user.userImage,
-            }
-
-            return JsonResponse(seri)
+        if not u:
+            return JsonResponse({"status": 500, "message": "Email não existe!"}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({}, status=status.HTTP_400_BAD_REQUEST)
+            user_authenticate = authenticate(username=u[0].username, password=request.data['userPassword'])
+
+            if user_authenticate is not None:
+                user = Users.objects.get(user=user_authenticate.id)
+                seri = {"data": {
+                            "userName": user.user.username,
+                            "userEmail": user.user.email,
+                            "userImage": user.userImage,
+                        },
+                        "status": 200,
+                        "message": "Entrou!"
+                }
+
+                return JsonResponse(seri)
+            else:
+                return JsonResponse({"status": 400, "message": "Email ou senha incorretos!"}, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        if request.data:
+            print(request.data)
+            deleteUser = User.objects.get(email=request.data['userEmail']).delete()
+            return Response(status=status.HTTP_200_OK)

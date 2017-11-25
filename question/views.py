@@ -15,11 +15,8 @@ def question(request):
 
     if request.method == 'GET':
         question = Question.objects.all()
-        if len(question) == 0:
-            return Response({}, status=status.HTTP_404_NOT_FOUND)
-        else:
-            serializer = QuestionSerializer(question, many=True)
-            return JsonResponse(serializer.data, safe=False)
+        serializer = QuestionSerializer(question, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
 

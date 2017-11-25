@@ -8,6 +8,7 @@ class QuestionSerializer(serializers.Serializer):
     questionDescription = serializers.CharField()
     questionAuthor = serializers.CharField()
     propositionFK = serializers.ReadOnlyField()
+    questionnaireFK = serializers.ReadOnlyField()
 
     class Meta:
         model = Question
@@ -16,4 +17,5 @@ class QuestionSerializer(serializers.Serializer):
             'questionSubtitle',
             'questionDescription',
             'questionAuthor',
-            'propositionFK',)
+            'propositionFK',
+            'questionnaireFK')

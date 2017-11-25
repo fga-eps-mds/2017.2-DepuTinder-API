@@ -1,5 +1,5 @@
 from questionnaire.models import Questionnaire
-from propositions.models import Propositions
+from question.models import Question
 from django.core.management import BaseCommand
 from faker import Faker
 from random import randint
@@ -9,14 +9,13 @@ class Command(BaseCommand):
         self.parseData()
 
     def parseData(self):
-        proposition = Propositions.objects.all()
-
         # Data to be parsed
         questionnaire, created = Questionnaire.objects.get_or_create(
-            questionnaireID = 0
+            maxQuestions = 10,
+            totalQuestions = 0,
         )
 
         if (created):
-            self.stdout.write("Questionario " + str(questionnaire.questionnaireID) + " salvo com sucesso!")
+            self.stdout.write("Questionario " + str(questionnaire.id) + " salvo(a) com sucesso!")
         else:
-            self.stdout.write("Questionario " + str(questionnaire.questionnaireID) + " não foi salvo no banco de dados!")
+            self.stdout.write("Questionario " + str(questionnaire.id) + " não foi salvo no banco de dados!")

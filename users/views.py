@@ -10,13 +10,14 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import requests, json
 from users.models import Users
+import jwt
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):
 
     #method to GET all users from API
     if request.method == 'GET':
-        users = User.objects.all()
+        users = Users.objects.all()
 
         seri = serializers.serialize('json', list(users))
 
@@ -40,6 +41,7 @@ def users(request):
                 users, created = Users.objects.get_or_create(
                     user = user,
                     userImage = request.data['userImage'],
+                    userToken = jwt.encode({'data': { 'userName': request.data['userName'], 'userEmail': request.data['userEmail'], 'userImage': request.data['userImage']}}, 'secret', algorithm='HS256')
                 )
 
                 if created:
@@ -64,6 +66,7 @@ def users(request):
                             "userName": user.user.username,
                             "userEmail": user.user.email,
                             "userImage": user.userImage,
+                            "userToken": user.userToken,
                         },
                         "status": 200,
                         "message": "Entrou!"

@@ -4,5 +4,5 @@ django-cors-headers
 requests
 Faker
 StringGenerator
-cryptography
 simplejson
+PyJWT

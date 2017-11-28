@@ -11,7 +11,9 @@ class Command(BaseCommand):
 
     def parseData(self):
         propositions = Propositions.objects.all()
-        questionnaire = Questionnaire.objects.get()
+        questionnaire = Questionnaire.objects.all()
+
+        questionnaire = questionnaire[0]
 
         for proposition in propositions:
             question, created = Question.objects.get_or_create(

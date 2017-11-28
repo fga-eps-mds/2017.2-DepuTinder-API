@@ -1,6 +1,7 @@
 
 from django.shortcuts import render
 from .models import Question
+from questionnaire.models import Questionnaire
 from  propositions.models import Propositions
 from .serializers import QuestionSerializer
 from rest_framework.response import Response
@@ -37,3 +38,22 @@ def question(request):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def updateQuestion(request):
+    q = Question.objects.filter(questionTitle=request.data['questionTitle'])
+
+    if not q:
+        return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        questionn = Questionnaire.objects.filter(id = request.data['questionnaireFK'])
+        questionnaire = Questionnaire.objects.filter(id = 3)
+
+#        questionn = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
+        if len(questionn) > 0:
+#            question = Question.objects.filter(questionnaire=questionn[0].id)
+            q[0].questionnaire = questionnaire[0]
+            q[0].save()
+            return JsonResponse({"status":200, "message": "Alterada"}, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)

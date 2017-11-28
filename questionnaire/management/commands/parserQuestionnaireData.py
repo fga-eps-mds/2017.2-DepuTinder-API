@@ -12,7 +12,7 @@ class Command(BaseCommand):
         # Data to be parsed
         questionnaire, created = Questionnaire.objects.get_or_create(
             maxQuestions = 10,
-            totalQuestions = 0,
+            totalQuestions = 5,
         )
 
         if (created):

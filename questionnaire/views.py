@@ -13,7 +13,7 @@ def questionnaire(request):
     if request.method == 'GET':
         questionnaire = Questionnaire.objects.all()
 
-        if len(questionnaire):
+        if len(questionnaire) == 0:
             return Response({}, status=status.HTTP_404_NOT_FOUND)
         else:
             serializer = QuestionnaireSerializer(questionnaire, many=True)

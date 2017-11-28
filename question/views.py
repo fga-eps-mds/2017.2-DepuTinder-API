@@ -1,6 +1,7 @@
 
 from django.shortcuts import render
 from .models import Question
+from questionnaire.models import Questionnaire
 from  propositions.models import Propositions
 from .serializers import QuestionSerializer
 from rest_framework.response import Response
@@ -45,14 +46,14 @@ def updateQuestion(request):
     if not q:
         return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_400_BAD_REQUEST)
     else:
-        questionn = Questionnaire.objects.get(questionnaire = request.data['questionnaireFK'])
-        question_authenticate = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
-        if question_authenticate is not None:
-            question = Question.objects.get(question=question_authenticate.id)
-            q[0].questionn = request.data['questionnaireFK']
-            print(request.data['questionnaireFK'])
+        questionn = Questionnaire.objects.filter(id = request.data['questionnaireFK'])
+        questionnaire = Questionnaire.objects.filter(id = 3)
+
+#        questionn = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
+        if len(questionn) > 0:
+#            question = Question.objects.filter(questionnaire=questionn[0].id)
+            q[0].questionnaire = questionnaire[0]
             q[0].save()
-            print(q[0].questionnaire)
-            return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"status":200, "message": "Alterada"}, status=status.HTTP_200_OK)
         else:
             return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)

@@ -14,3 +14,8 @@ install:
 # command to run tests
 script:
   - python manage.py test
+
+deploy:
+  provider: heroku
+  api_key: 9568926c-7b1d-4623-9fab-bd921061470b
+  on: development

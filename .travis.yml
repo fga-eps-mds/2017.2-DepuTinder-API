@@ -19,3 +19,8 @@ deploy:
   provider: heroku
   api_key: 9568926c-7b1d-4623-9fab-bd921061470b
   on: development
+  run:
+    - "python manage.py flush"
+    - "python manage.py makemigrations"
+    - "python manage.py migrate"
+    - "python manage.py parserAllData"

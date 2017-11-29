@@ -47,7 +47,7 @@ def updateQuestion(request):
         return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_400_BAD_REQUEST)
     else:
         questionn = Questionnaire.objects.filter(id = request.data['questionnaireFK'])
-        questionnaire = Questionnaire.objects.filter(id = 3)
+        questionnaire = Questionnaire.objects.filter(id = 2)
 
 #        questionn = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
         if len(questionn) > 0:

@@ -11,7 +11,7 @@ class Command(BaseCommand):
         self.parseData()
 
     def admin(self):
-        user = User.objects.create_user(username='admin', email='admin@admin.com', password='admin123', is_superuser=True)
+        user = User.objects.create_user(first_name='admin', email='admin@admin.com', password='admin123', is_superuser=True, username="admin")
         user.save()
 
         users, created = Users.objects.get_or_create(
@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
     def parseData(self):
         for i in range(10):
-            user = User.objects.create_user(username=fake.name(), email=fake.password(), password=fake.email())
+            user = User.objects.create_user(first_name=fake.name(), last_name=fake.name(), email=fake.password(), password=fake.email(), username=fake.name())
             user.save()
 
             users, created = Users.objects.get_or_create(

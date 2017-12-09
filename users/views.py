@@ -27,11 +27,22 @@ def getUsers(request):
 @api_view(['POST'])
 def createUser(request):
     if request.data:
+
         user = User.objects.filter(email=request.data['userEmail'])
+
         if len(user) > 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
-            user = User.objects.create_user(request.data['userName'], request.data['userEmail'], request.data['userPassword'])
+            name = request.data['userName'].split(' ')
+            FLAG = True
+            lastName = ''
+
+            for i in name:
+                if not FLAG:
+                    lastName += i + ' '
+                FLAG = False
+
+            user = User.objects.create_user(username=request.data['userName'], email=request.data['userEmail'], password=request.data['userPassword'], first_name=name, last_name=lastName)
             user.save()
             users, created = Users.objects.get_or_create(
                 user = user,
@@ -59,6 +70,7 @@ def userLogin(request):
                                    "userName": user.user.username,
                                    "userEmail": user.user.email,
                                    "userImage": user.userImage,
+                                   "admin": user.user.is_superuser,
                                     },
                                   "status": 200,
                                   "message": "Login Realizado com Sucesso   !"
@@ -90,5 +102,10 @@ def updateUser(request):
 @api_view(['DELETE'])
 def deleteUser(request):
     if request.data:
-        deleteUser = User.objects.get(email=request.data['userEmail']).delete()
+        deleteUserAuth = User.objects.get(email=request.data['userEmail'])
+        deleteUser = Users.objects.get(user=deleteUserAuth)
+
+        deleteUserAuth.delete()
+        deleteUser.delete()
+        
         return Response(status=status.HTTP_200_OK)

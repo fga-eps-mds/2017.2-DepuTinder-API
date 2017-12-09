@@ -10,7 +10,28 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -r requirements.txt
-  
+  - pip install coveralls
+
 # command to run tests
 script:
-  - python manage.py test
+  - coverage run --source=DepuTinder_API manage.py test
+  - coverage run --source=question manage.py test
+  - coverage run --source=propositions manage.py test
+  - coverage run --source=parlamentarians manage.py test
+  - coverage run --source=candidateRanking manage.py test
+  - coverage run --source=questionnaire manage.py test
+  - coverage run --source=votings manage.py test
+  - coverage run --source=users manage.py test
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: heroku
+  api_key: 9568926c-7b1d-4623-9fab-bd921061470b
+  on: development
+  run:
+    - "python manage.py flush"
+    - "python manage.py makemigrations"
+    - "python manage.py migrate"
+    - "python manage.py parserAllData"

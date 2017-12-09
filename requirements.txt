@@ -6,3 +6,4 @@ Faker
 StringGenerator
 simplejson
 PyJWT
+coveralls

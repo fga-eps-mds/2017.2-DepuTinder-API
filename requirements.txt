@@ -6,3 +6,4 @@ Faker
 StringGenerator
 cryptography
 simplejson
+coveralls

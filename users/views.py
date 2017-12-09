@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 import requests, json
 from .models import Users
 from .serializers import UsersSerializer
-import jwt
+import jwt as jwt
 
 @api_view(['GET'])
 def getUsers(request):
@@ -57,7 +57,7 @@ def userLogin(request):
 
         if user_authenticate is not None:
             user = Users.objects.get(user=user_authenticate.id)
-            user_serialization = {"data": {
+            user_serialization = {"user": {
                                    "userName": user.user.username,
                                    "userEmail": user.user.email,
                                    "userImage": user.userImage,

@@ -10,10 +10,14 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -r requirements.txt
+  - pip install coveralls
   
 # command to run tests
 script:
-  - python manage.py test
+  - coverage run --source=2017.2-DEPUTINDER-API setup.py test
+  
+after_success:
+  - coveralls
 
 deploy:
   provider: heroku

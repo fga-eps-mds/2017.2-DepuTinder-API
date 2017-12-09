@@ -14,7 +14,7 @@ install:
   
 # command to run tests
 script:
-  - coverage run --source=2017.2-DEPUTINDER-API setup.py test
+  - coverage run --source=2017.2-DepuTinder-API/DepuTinder_API settings.py test
   
 after_success:
   - coveralls

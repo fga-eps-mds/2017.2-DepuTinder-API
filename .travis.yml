@@ -10,10 +10,12 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -r requirements.txt
-  
+  - pip install coveralls
+
 # command to run tests
 script:
-  - python manage.py test
+  - coverage run --source=DepuTinder_API manage.py test
+  - coverage run --source=question manage.py test
 
 deploy:
   provider: heroku

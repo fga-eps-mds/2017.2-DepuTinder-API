@@ -16,6 +16,9 @@ install:
 script:
   - coverage run --source=DepuTinder_API manage.py test
   - coverage run --source=question manage.py test
+  
+after_success:
+  - coveralls
 
 deploy:
   provider: heroku

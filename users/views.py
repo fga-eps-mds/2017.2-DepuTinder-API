@@ -9,13 +9,13 @@ from rest_framework.decorators import api_view
 import requests, json
 from .models import Users
 from .serializers import UsersSerializer
-
+import jwt as jwt
 
 @api_view(['GET'])
 def getUsers(request):
     #method to GET all users from API
     if request.method == 'GET':
-        users = User.objects.all()
+        users = Users.objects.all()
 
         users_serialization = serializers.serialize('json', list(users))
 
@@ -47,6 +47,8 @@ def createUser(request):
             users, created = Users.objects.get_or_create(
                 user = user,
                 userImage = request.data['userImage'],
+                userToken = jwt.encode({'data': { 'userName': request.data['userName'], 'userEmail': request.data['userEmail'], 'userImage': request.data['userImage']}}, 'secret', algorithm='HS256')
+
             )
             if created:
                 return Response(status=status.HTTP_200_OK)
@@ -66,14 +68,15 @@ def userLogin(request):
 
         if user_authenticate is not None:
             user = Users.objects.get(user=user_authenticate.id)
-            user_serialization = {"data": {
+            user_serialization = {"user": {
                                    "userName": user.user.username,
                                    "userEmail": user.user.email,
                                    "userImage": user.userImage,
+                                   "userToken": user.userToken,
                                    "admin": user.user.is_superuser,
                                     },
                                   "status": 200,
-                                  "message": "Login Realizado com Sucesso   !"
+                                  "message": "Login Realizado com Sucesso!"
                                   }
 
             return JsonResponse(user_serialization)

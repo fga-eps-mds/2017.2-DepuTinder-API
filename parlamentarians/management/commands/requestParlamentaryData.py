@@ -7,7 +7,7 @@ from urllib.request import urlopen
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write("Fazendo request dos dados no portal da câmara")
-        for i in range(1, 7):
+        for i in range(1, 104):
             page = str(i)
             url_path = "https://dadosabertos.camara.leg.br/api/v2/deputados?pagina="+page+"&itens=5"
             parlamentariansData = self.request_data(url_path)

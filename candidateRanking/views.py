@@ -22,9 +22,9 @@ def rankingIndex(request):
     rankingResultData = {
      "rankingInfo": [
         {"groupID":"70-100","candidates": super_match},
-        {"groupID":"50 - 70","candidates": medium_match},
-        {"groupID":"30-50","candidates": high_match},
-        {"groupID":"10 - 30","candidates": super_match},
+        {"groupID":"50 - 70","candidates": high_match},
+        {"groupID":"30-50","candidates": medium_match},
+        {"groupID":"10 - 30","candidates": low_match},
         ],
     }
     return JsonResponse(rankingResultData, safe=False)

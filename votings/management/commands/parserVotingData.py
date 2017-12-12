@@ -1,12 +1,11 @@
-from votings.models import Votings
-from propositions.models import Propositions
-from questionnaire.models import Questionnaire
-from parlamentarians.models import Parlamentarians
-from django.core.management import BaseCommand
-from faker import Faker
-import random
+#!/usr/bin/python3
 
-fake = Faker()
+from votings.models import Votings
+from django.core.management import BaseCommand
+from parlamentarians.models import Parlamentarians
+from propositions.models import Propositions
+from csv import reader as r
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -16,15 +15,34 @@ class Command(BaseCommand):
         parlamentarians = Parlamentarians.objects.all()
         propositions = Propositions.objects.all()
 
+        votingsFile = open("votings.csv", "r")
+        reader = r(votingsFile)
+
+        # skip line 1
+        line = next(reader)
+        line = next(reader)
+
+
+        print ("------------" + str(line))
+        ID = 1
         for parlamentary in parlamentarians:
+            i = 1
+            print("Voto de " + line[0], end=' ')
             for proposition in propositions:
-                votings, created = Votings.objects.get_or_create(
-                    #Gera inteiro para votação: -1 = NAO / 0 = ME ABSTENHO / 1 = SIM
-                    candidateVote = random.randrange(-1,2),
-                    candidateID = parlamentary,
-                    propositionID = proposition,
-                )
-                if (created):
-                    self.stdout.write("Voting " + str(votings.candidateVote) + " salvo com sucesso!")
-                else:
-                    self.stdout.write("Voting " + str(votings.candidateVote) + " erro ao salvar!")
+                # votes.append(line[i])
+                if(i <= 10):
+                    votings, created = Votings.objects.get_or_create(
+                        candidateVote = line[i],
+                        candidateID = parlamentary,
+                        propositionID = proposition,
+                    )
+                    i += 1
+
+            if(ID < 512):
+                line = next(reader)
+            ID += 1
+
+            if (created):
+                self.stdout.write("salvo com sucesso!")
+            else:
+                self.stdout.write("não foi salvo com sucesso!")

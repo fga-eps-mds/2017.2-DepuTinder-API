@@ -41,19 +41,22 @@ def question(request):
 
 @api_view(['PUT'])
 def updateQuestion(request):
-    q = Question.objects.filter(questionTitle=request.data['questionTitle'])
+    questions = Question.objects.all()
+    currentQuestionnaire = Questionnaire.objects.get(id=1)
+    dontQuestionnaire = Questionnaire.objects.get(id=2)
+    questionnaire = request.data['questionnaireFK']
 
-    if not q:
-        return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_400_BAD_REQUEST)
-    else:
-        questionn = Questionnaire.objects.filter(id = request.data['questionnaireFK'])
-        questionnaire = Questionnaire.objects.filter(id = 2)
+    for question in questions:
+        for questionInQuestionnaire in questionnaire:
+            questionRequest = Question.objects.get(questionTitle=question.questionTitle)
+            print(questionRequest.questionTitle)
+            if question.questionTitle is questionInQuestionnaire['questionTitle']:
+                questionRequest.questionnaireFK = questionRequest.questionnaireFK._replace(currentQuestionnaire)
+                questionRequest.save()
+            else:
+                # questionRequest.questionnaireFK = dontQuestionnaire
+                questionRequest.questionnaireFK = questionRequest.questionnaireFK._replace(dontQuestionnaire)
+                questionRequest.save()
 
-#        questionn = authenticate(questionTitle=q[0].questionTitle, questionnaire=questionn)
-        if len(questionn) > 0:
-#            question = Question.objects.filter(questionnaire=questionn[0].id)
-            q[0].questionnaire = questionnaire[0]
-            q[0].save()
-            return JsonResponse({"status":200, "message": "Alterada"}, status=status.HTTP_200_OK)
-        else:
-            return JsonResponse({"status":400, "message": "Nao foi possivel salvar"}, status=status.HTTP_400_BAD_REQUEST)
+
+    return JsonResponse({"status": 500, "message": "Questão não existe!"}, status=status.HTTP_200_OK)

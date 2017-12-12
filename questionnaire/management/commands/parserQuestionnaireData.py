@@ -10,12 +10,14 @@ class Command(BaseCommand):
 
     def parseData(self):
         # Data to be parsed
-        questionnaire, created = Questionnaire.objects.get_or_create(
-            maxQuestions = 10,
-            totalQuestions = 5,
-        )
 
-        if (created):
-            self.stdout.write("Questionario " + str(questionnaire.id) + " salvo(a) com sucesso!")
-        else:
-            self.stdout.write("Questionario " + str(questionnaire.id) + " não foi salvo no banco de dados!")
+        for i in range(0,2):
+            questionnaire, created = Questionnaire.objects.get_or_create(
+                maxQuestions = 10,
+                totalQuestions = i,
+            )
+
+            if (created):
+                self.stdout.write("Questionario " + str(questionnaire.id) + " salvo(a) com sucesso!")
+            else:
+                self.stdout.write("Questionario " + str(questionnaire.id) + " não foi salvo no banco de dados!")

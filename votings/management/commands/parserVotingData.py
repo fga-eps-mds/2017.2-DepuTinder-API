@@ -27,6 +27,7 @@ class Command(BaseCommand):
         ID = 1
         for parlamentary in parlamentarians:
             i = 1
+            print("Voto de " + line[0], end=' ')
             for proposition in propositions:
                 # votes.append(line[i])
                 if(i <= 10):
@@ -37,10 +38,11 @@ class Command(BaseCommand):
                     )
                     i += 1
 
-            line = next(reader)
+            if(ID < 512):
+                line = next(reader)
             ID += 1
 
             if (created):
-                self.stdout.write("Voto " + str(votings) + " salvo com sucesso!")
+                self.stdout.write("salvo com sucesso!")
             else:
-                self.stdout.write("NOPE!")
+                self.stdout.write("não foi salvo com sucesso!")

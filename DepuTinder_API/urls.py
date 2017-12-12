@@ -15,9 +15,28 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from propositions.views import propositions
+from propositions.views import PropositionsView
+from votings.views import votings
+from questionnaire.views import questionnaire
+from parlamentarians.views import parlamentarians
+from users.views import getUsers, updateUser, createUser, userLogin, deleteUser
+from candidateRanking.views import rankingIndex, answeredQuestions
+from question.views import question, updateQuestion
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^propositions/', propositions),
+    url(r'^propositions/', PropositionsView),
+    url(r'^votings/', votings),
+    url(r'^ranking/', rankingIndex),
+    url(r'^questionnaire/', questionnaire),
+    url(r'^users/', getUsers),
+    url(r'^createUser/', createUser),
+    url(r'^userLogin/', userLogin),
+    url(r'^updateUser/', updateUser),
+    url(r'^deleteUser/', deleteUser),
+    url(r'^parlamentarians/', parlamentarians),
+    url(r'^sendAnsweredQuestions/', answeredQuestions),
+    url(r'^question/', question),
+    url(r'^updateQuestion/', updateQuestion),
 ]

@@ -1,0 +1,27 @@
+language: python
+python:
+- '3.4'
+env:
+- DJANGO_VERSION=1.11.6
+install:
+- pip install -q Django==$DJANGO_VERSION
+- pip install -r requirements.txt
+- pip install coveralls
+script:
+- coverage run --source=DepuTinder_API manage.py test
+- coverage run --source=question manage.py test
+- coverage run --source=propositions manage.py test
+- coverage run --source=parlamentarians manage.py test
+- coverage run --source=candidateRanking manage.py test
+- coverage run --source=questionnaire manage.py test
+- coverage run --source=votings manage.py test
+- coverage run --source=users manage.py test
+after_success:
+- coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: U5fa04h3M3lOSYLuNQlmDugQQfzj6+TEDTmFpZTfZrXpbxHrdTgdu3j3qPoyE73WjsQX2U722CJDrmDrNm75loAh0wx2ssjosTH1LS///cM6PH/5jY4l99+Mt3TNAbqMaPTaSRCCEbXAkeARU817DKe44+3u65sKU3MImWRMv849Arzfaq8xBeyVHp8W3f1gBK1Zn7Wkh02UPjcFqGxZFGKfEOJKP0k3KbOWO2rqh85bKovSw7uUEgoL+g45G1lUPwXhu9RepcCH0CGWZVv9UcvPZGCTVYu/P4u9wK48m60+T8iyuw9KqrNiu8ME/XgTYBZ1tacuncvXwMDBqd6Mjv8qlroHVeC0p54auU+JnBo/RRC29w4MpXi2Yn+Gz7LJcBJHUPWLAMzkTPrgrP7CKpQfdhARr584uGSHys+iIPMmWaEQPUauS4EbmxOzpWbtAvibXX1bSItLKdScsJDJNWTXJ7I+WAttKr4hEj9oClQIj3np61+muQIG5AnQATMZKWwOpmURA+DOEvo9KwpjrXQN9Bpr7PvKMR9waM0Sx1Dd4wg8Wv284oazr8Mublh0nhTXJ3+N3S+oagkeh5fSrD8tU2l4UgZ/4yT0rTq3T249N54I1m5+1Ly46E1zexa3Fqc1ssHlbrYxan1InpFBJLATinZJMKlbQrvJqgDlb50=
+  app: 2017.2-DepuTinder-API
+  on:
+    repo: fga-gpp-mds/2017.2-DepuTinder-API

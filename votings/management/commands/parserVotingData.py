@@ -41,6 +41,6 @@ class Command(BaseCommand):
             ID += 1
 
             if (created):
-                self.stdout.write("Voto " + str(votings) + "salvo com sucesso!"))
+                self.stdout.write("Voto " + str(votings) + " salvo com sucesso!")
             else:
                 self.stdout.write("NOPE!")

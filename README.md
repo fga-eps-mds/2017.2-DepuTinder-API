@@ -1,10 +1,18 @@
 ## 2017.2 - meRepresenta - Rest API
 
+[![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-DepuTinder-API/badge.svg?branch=development)](https://coveralls.io/github/fga-gpp-mds/2017.2-DepuTinder-API?branch=development)
+
 
 <p align="justify">&emsp;&emsp;A API do software possui um repositório destinado a ela. Este pode ser acessado no endereço a seguir:
 [meRepresenta](https://github.com/fga-gpp-mds/2017.2-DepuTinder)</p>
 
 ### Instalação
+
+<p align="justify">&emsp;&emsp;Para instalar todas as dependências necessárias do projeto, rode o seguinte comando:</p>
+
+```
+pip install -r requirements.txt
+```
 
 <p align="justify">&emsp;&emsp;Para que seja possível a utilização da API, é preciso executar o makemigrations. Este comando é necessário para criação de novas migrações relacionadas às models:</p>
 

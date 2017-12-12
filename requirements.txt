@@ -1,0 +1,9 @@
+Django
+djangorestframework
+django-cors-headers
+requests
+Faker
+StringGenerator
+simplejson
+PyJWT
+coveralls

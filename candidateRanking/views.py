@@ -14,6 +14,7 @@ from django.http import JsonResponse
 # request parameter must be here
 def rankingIndex(request):
     ranking = CandidateRanking.objects.all()[:1].get()
+    print(ranking)
     response = simplejson.loads(ranking.ranking)
     low_match = simplejson.loads(response['10% - 30%'])
     medium_match = simplejson.loads(response['30% - 50%'])
@@ -79,8 +80,6 @@ def generate_results(super_match, high_match, medium_match, low_match):
     "10% - 30%": toJson(low_match),
     }
     results = json.dumps(ranking_match)
-    print (results)
-
     CandidateRanking.objects.all().delete()
     ranking, created = CandidateRanking.objects.get_or_create(
         ranking = results

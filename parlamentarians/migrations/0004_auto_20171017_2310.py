@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='parlamentarians',
             name='parlamentaryPoliticalParty',
-            field=models.CharField(max_length=6),
+            field=models.CharField(max_length=30),
         ),
     ]

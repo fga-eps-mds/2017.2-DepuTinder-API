@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='propositions',
             name='questionnaire',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='propositionID', to='questionnaire.Questionnaire'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='propositionID', to='questionnaire.Questionnaire'),
         ),
     ]

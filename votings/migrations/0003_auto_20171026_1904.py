@@ -22,11 +22,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='votings',
             name='candidateID',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='candidateID', to='parlamentarians.Parlamentarians'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='candidateID', to='parlamentarians.Parlamentarians'),
         ),
         migrations.AddField(
             model_name='votings',
             name='propositionID',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='propositionID', to='propositions.Propositions'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='propositionID', to='propositions.Propositions'),
         ),
     ]

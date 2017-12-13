@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='votings',
             name='candidateID',
-            field=models.ForeignKey(default=0, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='candidateID', to='parlamentarians.Parlamentarians'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='candidateID', to='parlamentarians.Parlamentarians'),
         ),
     ]

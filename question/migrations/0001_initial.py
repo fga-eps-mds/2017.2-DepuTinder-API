@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('questionDescription', models.CharField(blank=True, max_length=200)),
                 ('questionAuthor', models.CharField(blank=True, max_length=50)),
                 ('questionLink', models.CharField(blank=True, max_length=50)),
-                ('proposition', models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='proposition', to='propositions.Propositions')),
+                ('proposition', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='proposition', to='propositions.Propositions')),
             ],
         ),
     ]

@@ -12,13 +12,11 @@ class Question(models.Model):
         'propositions.Propositions',
         on_delete=models.CASCADE,
         related_name='proposition',
-        default=0
     )
     questionnaire = models.ForeignKey(
         'questionnaire.Questionnaire',
         on_delete=models.CASCADE,
         related_name='questionnaire',
-        default=0
     )
     questionTitle = models.CharField(max_length=TITLE_LENGTH, blank=True)
     questionSubtitle = models.CharField(max_length=SUBTITLE_LENGTH, blank=True)

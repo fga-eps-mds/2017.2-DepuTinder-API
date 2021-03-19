@@ -9,7 +9,7 @@ cryptography==1.7.2
 Django==1.11.6
 django-celery-results==1.0.1
 django-cors-headers==2.1.0
-djangorestframework==3.7.1
+djangorestframework==3.11.2
 Faker==0.8.6
 idna==2.6
 kombu==4.1.0

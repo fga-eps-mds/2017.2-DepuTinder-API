@@ -15,7 +15,7 @@ idna==2.6
 kombu==4.1.0
 pyasn1==0.4.2
 pycparser==2.18
-PyJWT==1.5.3
+PyJWT==2.4.0
 python-dateutil==2.6.1
 pytz==2017.2
 requests==2.18.4

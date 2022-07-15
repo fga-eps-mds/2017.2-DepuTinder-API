@@ -7,7 +7,7 @@ cffi==1.11.2
 chardet==3.0.4
 cryptography==1.7.2
 Django==1.11.6
-django-celery-results==1.0.1
+django-celery-results==2.4.0
 django-cors-headers==2.1.0
 djangorestframework==3.7.1
 Faker==0.8.6
